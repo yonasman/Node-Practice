@@ -15,3 +15,14 @@ const path = require("path");
 const filePath = path.join("/content","file","note.txt")
 // console.log(filePath)
 // console.log(path.basename(filePath))
+
+// http
+const http = require("http");
+const server = http.createServer((req,res)=> {
+    res.write("Welcome to our page!");
+    console.log(req.url)
+    res.end();
+})
+server.listen(1000,()=> {
+    console.log("Listening to 1000 port")
+})

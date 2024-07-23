@@ -1,0 +1,2 @@
+The result of 14 when passed to myMultiplier function in first.js is 28.
+The result of 14 when passed to myMultiplier function in mySecond.js function is 42.

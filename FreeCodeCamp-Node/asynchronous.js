@@ -63,4 +63,12 @@ async function displayUser() {
         console.log("ERROR",error);
     }
 }
-displayUser()
+// displayUser()
+let promise = new Promise((resolve,reject) => {
+    reject("gone")
+})
+promise.then((data) => {
+    console.log(data)
+},(error)=>{
+    console.log(error)
+})

@@ -95,22 +95,46 @@ emitter.addListener("hi",()=>{
 // })
 
 // sending big data with stream
-const {createReadStream} = require("fs");
+// const {createReadStream} = require("fs");
+// const http = require("http");
+// const server = http.createServer((req,res) => {
+//     const file = createReadStream("./stream.txt","utf8");
+//     file.on("open",() => {
+//         file.pipe(res)
+//     })
+//     file.on("error",(error)=>{
+//         res.end(error)
+//         console.log("error:", error)
+//     })
+//     res.on("finish",()=> {
+//         console.log("Sending Finished");
+//     })
+// })
+
+// server.listen(5000,() => {
+//     console.log("Server is listening to 5000")
+// })
+
+// *******************************
+// creating server
 const http = require("http");
 const server = http.createServer((req,res) => {
-    const file = createReadStream("./stream.txt","utf8");
-    file.on("open",() => {
-        file.pipe(res)
-    })
-    file.on("error",(error)=>{
-        res.end(error)
-        console.log("error:", error)
-    })
-    res.on("finish",()=> {
-        console.log("Sending Finished");
-    })
+    let url = req.url;
+    if(url == "/") {
+        res.writeHead(200,{"content-type" : "text/html"});
+        res.write("<h1>Home page</h1>");
+        res.end();
+    } else if(url == "/about") {
+        res.writeHead(200,{"content-type" : "text/html"});
+        res.write("<h1>About page</h1>");
+        res.end();
+    } else {
+        res.writeHead(404,{"content-type" : "text/html"});
+        res.write("<h1>Page not Found</h1>");
+        res.end();
+    }
+    
 })
-
-server.listen(5000,() => {
-    console.log("Server is listening to 5000")
+server.listen(5000,()=> {
+    console.log("Listening to 5000")
 })

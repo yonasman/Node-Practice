@@ -71,4 +71,4 @@ const products = [
       "shipping": true
     },
 ]
-module.exports = {products}
+module.exports = products

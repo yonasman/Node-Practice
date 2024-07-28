@@ -1,8 +1,8 @@
 const express = require("express");
 const path = require("path");
-const {products} = require("./product")
+const products = require("./product")
 const app = express();
-
+// console.log(products)
 // // get request
 // app.get("/",(req,res) => {
 //     res.status(200).send("Home Page");

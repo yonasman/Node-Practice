@@ -1,8 +1,11 @@
 const express = require("express");
 const app = express()
 const authorize = require("./authorize")
+const morgan = require("morgan");
+
 // authorize user
 // app.use(authorize)
+// app.use(morgan("dev"))
 
 const logger = (req,res,next) => {
     const method = req.method;
@@ -14,10 +17,10 @@ const logger = (req,res,next) => {
 }
 
 
-app.get("/",logger,(req,res) => {
+app.get("/",(req,res) => {
     res.send("Home");
 })
-app.get("/about",authorize,(req,res) => {
+app.get("/ab",(req,res) => {
     res.send("About");
 })
 

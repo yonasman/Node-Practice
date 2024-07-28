@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apple Page</title>
+    <style>
+        input {
+            display: block;
+            margin-bottom: 10px;
+        }
+        label {
+            display: block;
+            font-weight: bold;
+            font-size: 15px;
+            margin-bottom: 5px;
+        }
+        button {
+            display: block;
+            /* margin-left: 30px; */
+            width: 100px;
+            height: 30px;
+        }
+        textarea {
+            height: 50px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Apple Products</h1>
+    <h2>Add Iphone</h2>
+    <form action="http://localhost:3001/add" method="post">
+        <label for="iphoneId">
+            IphoneID: 
+        </label>
+        <input type="text" name="iphoneId" id="iphoneId">
+        <label for="imagePath">
+            Iphone Image Link: 
+        </label>
+        <input type="text" name="imagePath" id="imagePath">
+
+        <label for="iphoneLink">
+            Iphone url: 
+        </label>
+        <input type="text" name="iphoneLink" id="pageLink">
+
+        <label for="iphoneTitle">
+            Iphone Title: 
+        </label>
+        <input type="text" name="iphoneTitle" id="iphoneTitle">
+        <label for="startingPrice">
+            Starting Price:
+        </label>
+        <input type="text" name="startingPrice" id="startingPrice">
+        <label for="priceRange">
+            Price Range:
+        </label>
+        <input type="text" name="priceRange" id="priceRange">
+        <label for="briefDesc">
+            Brief Description: 
+        </label>
+        <textarea name="briefDesc" id="briefDesc" ></textarea>
+        <label for="fullDesc">
+            Full Description: 
+        </label>
+        <textarea name="fullDesc" id="fullDesc"></textarea>
+        <button type="submit">Add Product</button>
+    </form>
+</body>
+</html>

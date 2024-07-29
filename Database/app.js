@@ -63,7 +63,7 @@ app.get("/submit",(req,res) => {
 
 // post handler
 app.post("/add",(req,res) => {
-    const iphoneId = req.body.iphoneId
+    const productLink = req.body.productLink
     const imagePath = req.body.imagePath
     const url = req.body.iphoneLink
     const iphoneTitle = req.body.iphoneTitle
@@ -73,18 +73,57 @@ app.post("/add",(req,res) => {
     const fullDesc = req.body.fullDesc
 
     // inserting to db
-    const insertProducts = `INSERT INTO Products(product_url,product_name) VALUES('${url}','${iphoneTitle}')`
-
+    const insertProducts = `INSERT INTO Products(product_url,product_name) VALUES(?,?)`;
+    const insertPrice = `INSERT INTO productPrice(product_id,starting_price,price_range) VALUES(?,?,?)`;
+    const insertProductDesc = `INSERT INTO productDescription(product_id,product_brief_desc,product_desc,product_image,product_link) VALUES(?,?,?,?,?)`;
     // execute the query
-    connection.query(insertProducts,(err,results)=> {
+    connection.query(insertProducts,[url,iphoneTitle],(err,results)=> {
+        const id = results.insertId;
+        // insert into price table
+        connection.query(insertPrice,[id,startingPrice,priceRange],(err,results,fields)=>{
+            if(err) {
+                console.log(err)
+            }
+        })
+
+        // insert into desc
+        connection.query(insertProductDesc,[id,briefDesc,fullDesc,imagePath,productLink],(err,results,fields)=> {
+            if(err) {
+                console.log(err)
+            }
+        })
+
         if(err) {
             console.log(err)
         }
-        console.log(results);
+        console.table(results);
     })
     res.send("posted")
 })
 
+
+// select
+app.get("/get-product",(req,res)=> {
+    const products = "SELECT * FROM products join productDescription join productPrice on products.product_id = productDescription.product_id and products.product_id = productPrice.product_id"
+    connection.query(products, (err,results,fields) => {
+        if(err) {
+            console.log(err)
+        }
+        res.send(results)
+    })
+})
+// update
+app.get("/update",(req,res)=> {
+    console.log(req.body)
+    // const {name,id} = req.body
+    const updateName = `UPDATE products SET product_name = '${name}' where product_id = '${id}'`
+    connection.query(updateName,(err,results,fields) => {
+        if(err) {
+            console.log(err)
+        }
+    })
+    res.send("updated")
+})
 // listen to port
 const PORT = 3001 
 app.listen(PORT,()=>{
